@@ -1,0 +1,17 @@
+module.exports = {
+  apps: [{
+    name: 'aws-recipe-scraper',
+    script: './index.js'
+  }],
+  deploy: {
+    production: {
+      user: 'ubuntu',
+      host: 'ec2-52-15-121-129.us-east-2.compute.amazonaws.com',
+      key: '/Users/nic/Documents/AmazonWebServicesFiles/keyPair/amazon-instance-keypair.cer',
+      ref: 'origin/master',
+      repo: 'https://github.com/nscheu/aws-reddit-recipes.git',
+      path: '/home/ubuntu/node-server',
+      'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js'
+    }
+  }
+}
