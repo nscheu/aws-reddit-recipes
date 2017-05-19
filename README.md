@@ -2,6 +2,9 @@
 
 Repo for Reddit Scrape Python Bot -> AWS MEAN and ReactNative Apps
 
+To Deploy after push:
+npm run-script deploy
+
 Update 5/19/17:
 AWS Account Setup -* 
 Ubuntu VM Setup Complete -*
