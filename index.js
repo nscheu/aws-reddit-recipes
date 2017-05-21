@@ -4,6 +4,19 @@ const app = express()
 app.use(express.static('public'))
 app.listen(3000, () => console.log('Server running on port 3000'))
 
+
+var MongoClient = require('mongodb').MongoClient;
+
+// Connect to the db
+MongoClient.connect("mongodb://localhost:27017", function (err, db) {
+   
+     if(err) throw err;
+     //Write databse Insert/Update/Query code here..
+});
+
+
+
+
 log("REDDIT GIFRECIPES NODE APP RUNNING!!!!!!!!!!!!!!!!!");
 
 fs = require('fs')

@@ -6,6 +6,11 @@ Info blog: http://redditrecipes.blogspot.com/
 To Deploy after push:
 npm run-script deploy
 
+To View Console Output
+pm2 logs
+or 
+pm2 logs [app-name]
+
 Update 5/19/17:
 AWS Account Setup -* 
 Ubuntu VM Setup Complete -*
