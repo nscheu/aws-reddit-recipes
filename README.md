@@ -1,6 +1,7 @@
 # aws-reddit-recipes
 
 Repo for Reddit Scrape Python Bot -> AWS MEAN and ReactNative Apps
+Info blog: http://redditrecipes.blogspot.com/
 
 To Deploy after push:
 npm run-script deploy
