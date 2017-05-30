@@ -11,6 +11,9 @@ module.exports = {
       ref: 'origin/master',
       repo: 'https://github.com/nscheu/aws-reddit-recipes.git',
       path: '/home/ubuntu/node-server',
+      "post-setup": "ls -la",
+      // Commands to execute locally (on the same machine you deploy things)
+      // Can be multiple commands separated by the character ";"
       'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js'
     }
   }
