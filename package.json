@@ -22,6 +22,7 @@
     "express": "^4.15.3"
   },
   "devDependencies": {
+    "passport-local": "^1.0.0",
     "pm2": "^2.4.6"
   }
 }

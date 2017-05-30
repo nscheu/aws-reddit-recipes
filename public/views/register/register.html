@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Register</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>Register</h1>
+        <form name="registerForm">
+            <input class="form-control" placeholder="username" ng-model="regUser.username"/>
+            <input class="form-control" type="password" placeholder="password" ng-model="regUser.password"/>
+            <input class="form-control" type="password" placeholder="validate password" ng-model="regUser.passwordVal"/>
+            <a class="btn btn-success btn-block" href="#/register" ng-click="registerUser(regUser)">Register</a>
+            <a class="btn btn-primary btn-block" href="#/login">Login</a>
+        </form>
+
+    </div>
+
+</body>
+</html>
+
+
