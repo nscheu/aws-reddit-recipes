@@ -9,6 +9,21 @@ var LocalStrategy = require('passport-local').Strategy;
 //var async = require('async');
 //var multer = require('multer');
 var port = 3000;
+var fs = require('fs');
+
+
+
+var recipeListRaw = [];
+// fs.readFile("public/data/redditDataRaw.txt", "utf8", function (error, data) {
+//     console.log(data[0]);
+//     recipeListRaw = data;
+// });
+var recipeListRaw = JSON.stringify(fs.readFileSync('public/data/redditDataRaw.txt', 'utf8'));
+var recipeListJson = JSON.parse("{"+recipeListRaw+"}");
+console.log(recipeListRaw[0]);
+// for(var rec in recipeListRaw){
+//     console.log(rec[0]);
+//}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true }));
