@@ -12,17 +12,31 @@ var port = 3000;
 var fs = require('fs');
 
 
-
+function prettyJSON(obj) {
+    console.log(JSON.stringify(obj, null, 6));
+}
 var recipeListRaw = [];
 // fs.readFile("public/data/redditDataRaw.txt", "utf8", function (error, data) {
 //     console.log(data[0]);
 //     recipeListRaw = data;
 // });
 var recipeListRaw = JSON.stringify(fs.readFileSync('public/data/redditDataRaw.txt', 'utf8'));
-var recipeListJson = JSON.parse("{"+recipeListRaw+"}");
-console.log(recipeListRaw[0]);
-// for(var rec in recipeListRaw){
-//     console.log(rec[0]);
+//console.log(recipeListRaw);
+var recipeListJson = JSON.parse(recipeListRaw);
+//var recipeListJson = JSON.parse("{"+recipeListRaw+"}");
+console.log("***************************************");
+//prettyJSON(recipeListJson);
+console.log("***************************************");
+console.log(typeof(recipeListJson));
+// for(var i = 0; i < 20; i++){
+//     console.log(recipeListJson[i]);
+// }
+// for(var rec in recipeListJson){
+//      console.log(rec[0]);
+     // for(var item in rec){
+     //     console.log(rec[item]);
+     // }
+    //console.log("***************************************");
 //}
 
 app.use(bodyParser.json());
