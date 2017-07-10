@@ -30,7 +30,7 @@ fs.readFile(__dirname+'/redditDataRAW.json', 'utf8', function (err,data) {
         recipeListJson = JSON.parse(data);
     }
 });
-
+console.log(recipeListJson);
 // Might want to do this asynchronously instead - TODO:
 //var recipeListJson = JSON.parse(fs.readFileSync(__dirname+'/public/data/redditDataRaw.json', 'utf8'));
 //prettyJSON(recipeListJson);
