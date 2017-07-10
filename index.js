@@ -35,7 +35,7 @@ fs.readFile(__dirname+'/redditDataRAW.json', 'utf8', function (err,data) {
         for(var i = 0; i < recipeListJson.submissions.length; i++){
             var recipe = recipeListJson.submissions[i];
 
-            if(recipe.title != "Community Guidelines") {
+            if(recipe.title != "Community Guidelines" || recipe.thumbnail == "self") {
                 RecipeModel.update({title: recipe.title, created: recipe.created}, {$setOnInsert: recipe}, {upsert: true},
                     function (err, numAffected) {
                         //console.log(numAffected);
