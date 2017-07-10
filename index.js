@@ -45,7 +45,7 @@ app.use(passport.session());
 //app.use(express.static('public'))
 app.use(express.static(__dirname + '/public'));// GET /style.css etc
 //app.listen(port, () => console.log('Server running on port 3000'))
-app.listen(port);
+app.listen(process.env.PORT || port);
 
 // Handle Mongoose's Promise library being deprecated
 mongoose.Promise = global.Promise;
