@@ -15,29 +15,25 @@ var fs = require('fs');
 function prettyJSON(obj) {
     console.log(JSON.stringify(obj, null, 6));
 }
-var recipeListRaw = [];
-// fs.readFile("public/data/redditDataRaw.txt", "utf8", function (error, data) {
-//     console.log(data[0]);
-//     recipeListRaw = data;
+
+
+
+
+
+
+//var recipeListJson = {};
+// Parses the text file containing data from r/GifRecipes
+// fs.readFile('public/data/redditDataRAW.json', 'utf8', function (err,data) {
+//     if (err) {
+//         return console.log(err);
+//     }
+//     recipeListJson = JSON.parse(data);
 // });
-var recipeListRaw = JSON.stringify(fs.readFileSync('public/data/redditDataRaw.txt', 'utf8'));
-//console.log(recipeListRaw);
-var recipeListJson = JSON.parse(recipeListRaw);
-//var recipeListJson = JSON.parse("{"+recipeListRaw+"}");
-console.log("***************************************");
+
+// Might want to do this asynchronously instead - TODO:
+var recipeListJson = JSON.parse(fs.readFileSync('public/data/redditDataRaw.json', 'utf8'));
 //prettyJSON(recipeListJson);
-console.log("***************************************");
-console.log(typeof(recipeListJson));
-// for(var i = 0; i < 20; i++){
-//     console.log(recipeListJson[i]);
-// }
-// for(var rec in recipeListJson){
-//      console.log(rec[0]);
-     // for(var item in rec){
-     //     console.log(rec[item]);
-     // }
-    //console.log("***************************************");
-//}
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true }));
@@ -53,7 +49,17 @@ app.use(express.static(__dirname + '/public'));// GET /style.css etc
 //app.listen(port, () => console.log('Server running on port 3000'))
 app.listen(port);
 
+// Handle Mongoose's Promise library being deprecated
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/recipeApp');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    // we're connected!
+    console.log("Connected to Database");
+});
+// Debug Mode for Mongoose
+//mongoose.set('debug', true);
 
 // Schema for site User Profile
 var UserSchema = new mongoose.Schema({
@@ -61,9 +67,65 @@ var UserSchema = new mongoose.Schema({
     password: String,
 });
 
-// Mongoose Model for User data
-var UserModel = mongoose.model('UserModel', UserSchema);
+// Schema for site Recipe Profile
+var RecipeSchema = new mongoose.Schema({
+    title: String,
+    author: String,
+    thumbnail: String,
+    url: String,
+    score: Number,
+    created: String
+});
 
+// Mongoose Model for User Data
+var UserModel = mongoose.model('UserModel', UserSchema);
+// Mongoose Model for Recipe Data
+var RecipeModel = mongoose.model('RecipeModel', RecipeSchema);
+
+// For each recipe scraped, add to DB if doesn't exist already
+//console.log(recipeListJson.submissions[1]);
+//console.log(recipeListJson.submissions.length);
+for(var i = 0; i < recipeListJson.submissions.length; i++){
+    //console.log(recipeListJson.submissions[i].title);
+    var recipe = recipeListJson.submissions[i];
+    //console.log(recipe.title);
+    // for(var r = 0; r < recipe.size; r++){
+    //     //prettyJSON(recipe[r]);
+    // }
+    // var newRecipe = new RecipeModel(recipe);
+    // newRecipe.save(function (erro, recc) {
+    //     if(recc){
+    //         console.log("Success Adding Recipe to DB");
+    //     }
+    //     else{
+    //         console.log(erro);
+    //     }
+    // });
+
+    RecipeModel.update({title: recipe.title, created: recipe.created}, {$setOnInsert: recipe},
+        {upsert: true}, function(err, numAffected) { console.log(numAffected); }
+    );
+
+    // RecipeModel.findOne({created: recipe.created}, function (err, rec) {
+    //     if (rec) {
+    //         console.log("Recipe Found");
+    //         console.log(rec);
+    //     }
+    //     else{
+    //         console.log("Recipe Not Found in DB - Attempting to Save:::");
+    //         var newRecipe = new RecipeModel(recipe);
+    //         newRecipe.save(function (erro, recc) {
+    //             if(recc){
+    //                 console.log("Success Adding Recipe to DB");
+    //             }
+    //             else{
+    //                 console.log("Save Recipe Failed");
+    //                 //console.log(erro);
+    //             }
+    //         });
+    //     }
+    // });
+}
 
 
 //var MongoClient = require('mongodb').MongoClient;
@@ -160,14 +222,10 @@ app.post('/logout', function (req, res) {
 console.log("REDDIT GIFRECIPES NODE APP RUNNING!!!!!!!!!!!!!!!!!");
 
 
-// Parses the text file containing data from r/GifRecipes
-fs = require('fs')
-fs.readFile('pyScraper/data/redditDataRAW.txt', 'utf8', function (err,data) {
-  if (err) {
-    return console.log(err);
-  }
-  //console.log(data);
-});
+
+
+
+
 
 
 

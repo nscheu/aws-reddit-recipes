@@ -22,7 +22,7 @@ def pp_json(json_thing, sort=True, indents=4):
 #pp_json(your_json_string_or_dict)
 
 # Get the Posts from the given subreddit
-submissionObjects = subreddit.hot(limit=5);
+submissionObjects = subreddit.hot(limit=7);
 
 # Start the output string
 outputJson = '{ "submissions" : ['
