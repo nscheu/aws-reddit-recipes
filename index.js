@@ -19,17 +19,17 @@ var fs = require('fs');
 
 
 
-//var recipeListJson = {};
+var recipeListJson = { submissions: [] };
 // Parses the text file containing data from r/GifRecipes - Async version
-// fs.readFile('public/data/redditDataRAW.json', 'utf8', function (err,data) {
-//     if (err) {
-//         return console.log(err);
-//     }
-//     recipeListJson = JSON.parse(data);
-// });
+fs.readFile(__dirname+'/public/data/redditDataRAW.json', 'utf8', function (err,data) {
+    if (err) {
+        return console.log(err);
+    }
+    recipeListJson = JSON.parse(data);
+});
 
 // Might want to do this asynchronously instead - TODO:
-var recipeListJson = JSON.parse(fs.readFileSync(__dirname+'/public/data/redditDataRaw.json', 'utf8'));
+//var recipeListJson = JSON.parse(fs.readFileSync(__dirname+'/public/data/redditDataRaw.json', 'utf8'));
 //prettyJSON(recipeListJson);
 
 
