@@ -9,7 +9,7 @@ reddit = praw.Reddit('bot1')
 subreddit = reddit.subreddit("GifRecipes")
 
 # Opens a file to write or append to -- (To be read by webserver)
-opFile = open("public/data/redditDataRAW.json", "w+")
+opFile = open("redditDataRAW.json", "w+")
 
 # Get the Posts from the given subreddit
 submissionObjects = subreddit.hot(limit=7);

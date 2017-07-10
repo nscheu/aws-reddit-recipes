@@ -21,7 +21,7 @@ var fs = require('fs');
 
 var recipeListJson = { submissions: [] };
 // Parses the text file containing data from r/GifRecipes - Async version
-fs.readFile(__dirname+'/public/data/redditDataRAW.json', 'utf8', function (err,data) {
+fs.readFile(__dirname+'/redditDataRAW.json', 'utf8', function (err,data) {
     if (err) {
         return console.log(err);
     }
