@@ -25,7 +25,10 @@ fs.readFile(__dirname+'/redditDataRAW.json', 'utf8', function (err,data) {
     if (err) {
         return console.log(err);
     }
-    recipeListJson = JSON.parse(data);
+    else{
+        console.log(data);
+        recipeListJson = JSON.parse(data);
+    }
 });
 
 // Might want to do this asynchronously instead - TODO:
