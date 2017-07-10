@@ -29,7 +29,7 @@ var fs = require('fs');
 // });
 
 // Might want to do this asynchronously instead - TODO:
-var recipeListJson = JSON.parse(fs.readFileSync('public/data/redditDataRaw.json', 'utf8'));
+var recipeListJson = JSON.parse(fs.readFileSync(__dirname+'/public/data/redditDataRaw.json', 'utf8'));
 //prettyJSON(recipeListJson);
 
 
