@@ -6,9 +6,9 @@ recipeApp.controller('LoginCtrl', function ($location, $scope, $http, $rootScope
             .success(function (response) {
                 console.log("Login Success");
                 //console.log(response);
-                $rootScope.currentUser = user;
+                $rootScope.currentUser = response;
                 //console.log(user);
-                //$location.url("/profile");
+                $location.url("/profile");
             }).error(function(err) {
                 alert(err);
             })

@@ -75,10 +75,18 @@ var RecipeSchema = new mongoose.Schema({
     created: String
 });
 
+// Schema for favorited Recipes
+var FavoriteSchema = new mongoose.Schema({
+    user_id: String,
+    recipe_id: String
+})
+
 // Mongoose Model for User Data
 var UserModel = mongoose.model('UserModel', UserSchema);
 // Mongoose Model for Recipe Data
 var RecipeModel = mongoose.model('RecipeModel', RecipeSchema);
+// Mongoose Model for User Favorites
+var FavoriteModel = mongoose.model('FavoriteModel', FavoriteSchema);
 
 // For each recipe scraped, add to DB if doesn't exist already
 for(var i = 0; i < recipeListJson.submissions.length; i++){
@@ -107,6 +115,18 @@ app.get('/recipes', function (req, res) {
     });
 });
 
+// Favorites Endpoint
+app.post('/favorite', function (req, res) {
+    console.log("REST::Favorite ");
+    console.log(req.user_id);
+    FavoriteModel.update({user_id: req.body.user_id, recipe_id: req.body.recipe_id },
+        { $setOnInsert: req.body }, { upsert: true },
+        function (err, numAffected) {
+            console.log(numAffected);
+            res.send(req.body);
+        }
+    );
+});
 
 //TODO: Remove this
 //var MongoClient = require('mongodb').MongoClient;
