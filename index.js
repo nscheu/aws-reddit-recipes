@@ -26,11 +26,27 @@ fs.readFile(__dirname+'/redditDataRAW.json', 'utf8', function (err,data) {
         return console.log(err);
     }
     else{
+        console.log("data begin");
         console.log(data);
+        console.log("data end");
         recipeListJson = JSON.parse(data);
+
+        // For each recipe scraped, add to DB if doesn't exist already
+        for(var i = 0; i < recipeListJson.submissions.length; i++){
+            var recipe = recipeListJson.submissions[i];
+
+            if(recipe.title != "Community Guidelines") {
+                RecipeModel.update({title: recipe.title, created: recipe.created}, {$setOnInsert: recipe}, {upsert: true},
+                    function (err, numAffected) {
+                        //console.log(numAffected);
+                    }
+                );
+            }
+        }
+
     }
 });
-console.log(recipeListJson);
+//console.log(recipeListJson);
 // Might want to do this asynchronously instead - TODO:
 //var recipeListJson = JSON.parse(fs.readFileSync(__dirname+'/public/data/redditDataRaw.json', 'utf8'));
 //prettyJSON(recipeListJson);
@@ -91,18 +107,7 @@ var RecipeModel = mongoose.model('RecipeModel', RecipeSchema);
 // Mongoose Model for User Favorites
 var FavoriteModel = mongoose.model('FavoriteModel', FavoriteSchema);
 
-// For each recipe scraped, add to DB if doesn't exist already
-for(var i = 0; i < recipeListJson.submissions.length; i++){
-    var recipe = recipeListJson.submissions[i];
 
-    if(recipe.title != "Community Guidelines") {
-        RecipeModel.update({title: recipe.title, created: recipe.created}, {$setOnInsert: recipe}, {upsert: true},
-            function (err, numAffected) {
-                //console.log(numAffected);
-            }
-        );
-    }
-}
 
 
 // Recipes Endpoint
