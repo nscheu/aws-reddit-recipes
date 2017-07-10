@@ -8,7 +8,7 @@ var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
 //var async = require('async');
 //var multer = require('multer');
-var port = 8081;
+var port = 3000;
 var fs = require('fs');
 
 
