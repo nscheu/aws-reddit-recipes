@@ -8,7 +8,7 @@ var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
 //var async = require('async');
 //var multer = require('multer');
-var port = 3000;
+var port = 8081;
 var fs = require('fs');
 
 
@@ -45,7 +45,7 @@ app.use(passport.session());
 //app.use(express.static('public'))
 app.use(express.static(__dirname + '/public'));// GET /style.css etc
 //app.listen(port, () => console.log('Server running on port 3000'))
-app.listen(process.env.PORT || port);
+app.listen(port);
 
 // Handle Mongoose's Promise library being deprecated
 mongoose.Promise = global.Promise;
