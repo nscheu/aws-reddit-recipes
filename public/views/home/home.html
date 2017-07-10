@@ -1,14 +1,26 @@
 Welcome to the GifRecipes Organizer.
 
 <div name="recipesTabularView">
-    This is where GifRecipes are displayed in Table - 10 at a time - pagination
+    NOTES::This is where GifRecipes are displayed in Table - 10 at a time - pagination would be good
+    <br>
+    Have usage buttons only visible when logged in (Save to favorites)
+    <br>
     <table>
         <thead>
-        <th></th>
-        <th>Title</th>
+            <th>Thmb</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Score</th>
+            <th>Actions</th>
         </thead>
         <tbody>
-        <tr data-ng-repeat="rec in recipes"></tr>
+        <tr data-ng-repeat="rec in recipes">
+            <td><img ng-src="{{ rec.thumbnail }}" id="redditThumb"></td>
+            <td>{{ rec.title }}</td>
+            <td>{{ rec.author }}</td>
+            <td>{{ rec.score }}</td>
+            <td><div ng-show='currentUser'><button type="button" class="btn btn-primary">Save</button></div></td>
+        </tr>
         </tbody>
     </table>
 </div>
