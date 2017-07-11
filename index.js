@@ -26,9 +26,6 @@ fs.readFile(__dirname+'/redditDataRAW.json', 'utf8', function (err,data) {
         return console.log(err);
     }
     else{
-        console.log("data begin");
-        console.log(data);
-        console.log("data end");
         recipeListJson = JSON.parse(data);
 
         // For each recipe scraped, add to DB if doesn't exist already
@@ -66,6 +63,12 @@ app.use(express.static(__dirname + '/public'));// GET /style.css etc
 //app.listen(port, () => console.log('Server running on port 3000'))
 app.listen(port);
 
+
+
+//************************************************************/
+// Database Functions & Schema
+//************************************************************/
+
 // Handle Mongoose's Promise library being deprecated
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/recipeApp');
@@ -82,6 +85,7 @@ db.once('open', function() {
 var UserSchema = new mongoose.Schema({
     username: String,
     password: String,
+    favorites: [ String ]
 });
 
 // Schema for site Recipe Profile
@@ -110,41 +114,10 @@ var FavoriteModel = mongoose.model('FavoriteModel', FavoriteSchema);
 
 
 
-// Recipes Endpoint
-app.get('/recipes', function (req, res) {
-    console.log("REST::Recipes ");
-    RecipeModel.find({},function(err, recipes) {
-        if(err){
-            res.send(err);
-        }
-        else{
-            res.json(recipes);
-        }
-    });
-});
 
-// Favorites Endpoint
-app.post('/favorite', function (req, res) {
-    console.log("REST::Favorite ");
-    console.log(req.user_id);
-    FavoriteModel.update({user_id: req.body.user_id, recipe_id: req.body.recipe_id },
-        { $setOnInsert: req.body }, { upsert: true },
-        function (err, numAffected) {
-            console.log(numAffected);
-            res.send(req.body);
-        }
-    );
-});
-
-//TODO: Remove this
-//var MongoClient = require('mongodb').MongoClient;
-
-// // Connect to the db
-// MongoClient.connect("mongodb://localhost:27017", function (err, db) {
-   
-//      if(err) throw err;
-//      //Write databse Insert/Update/Query code here..
-// });
+//************************************************************/
+// Authentication Functions
+//************************************************************/
 
 passport.use(new LocalStrategy(
     function (username, password, done) {
@@ -176,6 +149,14 @@ var auth = function (req, res, next) {
         next();
 };
 
+
+
+
+
+
+//************************************************************/
+// API Endpoints
+//************************************************************/
 
 /*
 Login User REST endpoint
@@ -219,6 +200,43 @@ app.post('/logout', function (req, res) {
 
 
 
+// Recipes Endpoint
+app.get('/recipes', function (req, res) {
+    console.log("REST::Recipes ");
+    RecipeModel.find({},function(err, recipes) {
+        if(err){
+            res.send(err);
+        }
+        else{
+            res.json(recipes);
+        }
+    });
+});
+
+// Add to Favorites Endpoint
+app.post('/favorite', function (req, res) {
+    console.log("REST::Favorite ");
+    UserModel.findOneAndUpdate({ _id: req.body._id }, req.body, {upsert:true}, function(err, doc){
+        console.log(req.body);
+        if (err) return res.send(500, { error: err });
+        return res.send("succesfully saved");
+    });
+
+
+});
+
+
+// Get a User's Favorites Endpoint
+app.post('/getFavorites', function (req, res) {
+    console.log("REST::Get Favorites ");
+    console.log(req.body);
+    RecipeModel.find({
+        '_id': { $in: req.body }
+    }, function(err, docs){
+        console.log(docs);
+        return res.send(docs);
+    });
+});
 
 
 // Server Running Message

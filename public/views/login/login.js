@@ -8,7 +8,7 @@ recipeApp.controller('LoginCtrl', function ($location, $scope, $http, $rootScope
                 //console.log(response);
                 $rootScope.currentUser = response;
                 //console.log(user);
-                $location.url("/profile");
+                $location.url("/home");
             }).error(function(err) {
                 alert(err);
             })

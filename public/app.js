@@ -15,6 +15,10 @@ recipeApp.config(function($routeProvider, $httpProvider) {
             templateUrl: '/views/login/login.html',
             controller: 'LoginCtrl'
         })
+        .when('/profile', {
+            templateUrl: '/views/profile/profile.html',
+            controller: 'ProfileCtrl'
+        })
         .when('/register', {
             templateUrl: '/views/register/register.html',
             controller: 'RegisterCtrl'

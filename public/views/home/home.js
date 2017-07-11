@@ -12,14 +12,17 @@ recipeApp.controller('HomeCtrl', function($scope, $http, $rootScope, $location) 
     $scope.saveFavorite = function(recipe_id) {
         //console.log(recipe_id);
         //console.log($rootScope.currentUser._id);
+        $rootScope.currentUser.favorites.push(recipe_id);
+        console.log($rootScope.currentUser);
         var favObj = {
-            user_id: $rootScope.currentUser._id,
-            recipe_id: recipe_id
+            //user_id: $rootScope.currentUser._id,
+            //recipe_id: recipe_id,
+            //favorites:
         }
-        $http.post("/favorite", favObj)
+        $http.post("/favorite", $rootScope.currentUser)
             .success(function (response) {
-                console.log(response);
-                //$scope.recipes = response.data;
+                //console.log(response);
+                $rootScope.currentUser = response;
             })
             .error(function(err) {
                 alert(err);
