@@ -23,8 +23,8 @@ Hello {{ currentUser.username }}
             <td>{{ rec._id }}</td>
             <td>
                 <div ng-show='currentUser'>
-                    <button type="button" class="btn btn-primary" ng-click="saveFavorite(rec._id)">
-                        Save
+                    <button type="button" class="btn btn-danger" ng-click="deleteFavorite(rec._id)">
+                        Delete
                     </button>
                 </div>
             </td>

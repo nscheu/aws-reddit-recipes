@@ -12,6 +12,7 @@ recipeApp.controller('RegisterCtrl', function ($location, $scope, $http) {
             var cleanUser = {
                 username: user.username,
                 password: user.password,
+                favorites: []
             }
             $http.post('/register', cleanUser)
                 .success(function (response) {

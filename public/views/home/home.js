@@ -1,31 +1,24 @@
 recipeApp.controller('HomeCtrl', function($scope, $http, $rootScope, $location) {
+    $scope.favorites = [];
      $http.get("/recipes")
          .then(function (response) {
              console.log(response);
              $scope.recipes = response.data;
          });
-         // .success(function (resource) {
-         //     console.log(resource);
-         //     $scope.recipes = resource;
-         // });
 
     $scope.saveFavorite = function(recipe_id) {
-        //console.log(recipe_id);
-        //console.log($rootScope.currentUser._id);
-        $rootScope.currentUser.favorites.push(recipe_id);
-        console.log($rootScope.currentUser);
+        $scope.favorites.push(recipe_id);
         var favObj = {
-            //user_id: $rootScope.currentUser._id,
-            //recipe_id: recipe_id,
-            //favorites:
+            _id: $rootScope.currentUser._id,
+            favorites: $scope.favorites
         }
-        $http.post("/favorite", $rootScope.currentUser)
+        $http.post("/favorite", favObj)
             .success(function (response) {
-                //console.log(response);
-                $rootScope.currentUser = response;
+                console.log(response);
+                $rootScope.currentUser.favorites.push(recipe_id);
             })
             .error(function(err) {
-                alert(err);
+                console.log(err);
             });
     }
 });
