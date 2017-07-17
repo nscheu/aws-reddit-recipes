@@ -20,6 +20,8 @@ Travis CI is now working - verify build status at:
 https://travis-ci.org/nscheu/aws-reddit-recipes/builds
 
 Also added Jasmine for testing, tests to be added this week - week of 7/17/17
+jasmine command wasn't working, created a script instead to call the ugly:
+./node_modules/.bin/jasmine  ---> jasmine.py 
 
 Update 5/19/17:
 AWS Account Setup -* 

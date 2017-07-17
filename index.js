@@ -275,10 +275,13 @@ function getCurrentDate(){
 	return today;
 }
 
-
-// For testing Travis
-module.exports = {
-    add: function (a, b) {
-        return a + b;
-    }
+var exports = module.exports = {};
+exports.AddNumber = function(a,b)
+{
+    return a+b;
 };
+
+// For testing Jasmine
+exports.helloWorld = function() {
+    return 'Hello world!';
+}
