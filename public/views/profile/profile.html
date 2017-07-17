@@ -5,6 +5,10 @@ Hello {{ currentUser.username }}
     <br>
     Have usage buttons only visible when logged in (Save to favorites)
     <br>
+    There's a weird bug happening where after logging in, viewing, and deleting 1 or more recipes (in the middle of the
+    list), the list elements after the deleted one are removed from the favorites list in scope.
+    FWIW, the Database is updated correctly, so this is an issue in the view.
+    <br>
     <table>
         <thead>
         <th>Thmb</th>

@@ -6,7 +6,7 @@
   "scripts": {
     "restart": "pm2 startOrRestart ecosystem.config.js",
     "deploy": "pm2 deploy ecosystem.config.js production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/nscheu/aws-reddit-recipes#readme",
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "jasmine": "^2.6.0",
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "body-parser": "^1.17.2",

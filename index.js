@@ -8,6 +8,12 @@ var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
 //var async = require('async');
 //var multer = require('multer');
+var cron = require('node-cron');
+
+cron.schedule('0 * * * *', function(){
+    console.log('running a task every minute');
+});
+
 var port = 3000;
 var fs = require('fs');
 
@@ -273,3 +279,11 @@ function getCurrentDate(){
 	today = mm+'/'+dd+'/'+yyyy;
 	return today;
 }
+
+
+// For testing Travis
+module.exports = {
+    add: function (a, b) {
+        return a + b;
+    }
+};

@@ -132,11 +132,11 @@ recipeApp.controller('NavCtrl', function ($scope, $http, $location, SecurityServ
     });
     }
 
-    $scope.logout = function(callback) {
+    $scope.logout = function() {
         $http.post('/logout')
             .success(function(){
                 $scope.currentUser = null;
-                //callback();
+                $location.url("/");
             })
     }
 });
