@@ -117,14 +117,27 @@ recipeApp.controller('createUserController', function($scope) {
 
 
 
-recipeApp.controller('NavCtrl', function ($rootScope, $scope, $http, $location) {
-    console.log("NavCtrl Controller");
-    $scope.logout = function () {
-        $http.post("/logout")
-            .success(function () {
-                $rootScope.currentUser = null;
-                $location.url("/login");
-            });
+recipeApp.controller('NavCtrl', function ($scope, $http, $location, SecurityService) {
+    $scope.login = function (user) {
+        console.log("NavCtrl");
+        SecurityService.login(user, function(response){
+            // if(err) {
+            //     console.log(err);
+            // }
+            // else{
+                console.log(response);
+                $scope.currentUser = response;
+                $location.url("/home");
+            //}
+    });
+    }
+
+    $scope.logout = function(callback) {
+        $http.post('/logout')
+            .success(function(){
+                $scope.currentUser = null;
+                //callback();
+            })
     }
 });
 
@@ -132,7 +145,7 @@ recipeApp.controller('NavCtrl', function ($rootScope, $scope, $http, $location) 
 recipeApp.factory('SecurityService', function ($http, $location, $rootScope) {
 
     var login = function (user, callback) {
-        //console.log(user);
+        console.log("Factory Login");
         $http.post('/login', user)
             .success(function(user){
                 $rootScope.currentUser = user;

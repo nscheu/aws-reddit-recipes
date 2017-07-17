@@ -1,8 +1,8 @@
-recipeApp.controller('HomeCtrl', function($scope, $http, $rootScope, $location) {
+recipeApp.controller('HomeCtrl', function($scope, $http, $rootScope, SecurityService) {
     $scope.favorites = [];
-     $http.get("/recipes")
+    $http.get("/recipes")
          .then(function (response) {
-             console.log(response);
+             //console.log(response);
              $scope.recipes = response.data;
          });
 
@@ -14,11 +14,15 @@ recipeApp.controller('HomeCtrl', function($scope, $http, $rootScope, $location) 
         }
         $http.post("/favorite", favObj)
             .success(function (response) {
-                console.log(response);
+                //console.log(response);
                 $rootScope.currentUser.favorites.push(recipe_id);
             })
             .error(function(err) {
                 console.log(err);
             });
     }
+
+
+
+
 });

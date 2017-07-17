@@ -217,23 +217,27 @@ app.get('/recipes', function (req, res) {
 app.post('/favorite', function (req, res) {
     console.log("REST::Favorite ");
     UserModel.findOneAndUpdate({ _id: req.body._id }, req.body, {upsert:true}, function(err, doc){
-        console.log(req.body);
         if (err) return res.send(500, { error: err });
         return res.send("succesfully saved");
     });
+});
 
-
+// Delete from Favorites Endpoint
+app.post('/deleteFavorite', function (req, res) {
+    console.log("REST::Delete Favorite ");
+    UserModel.findByIdAndUpdate(mongoose.mongo.ObjectID(req.body.userId),
+        { '$pull': { 'favorites': req.body.favId }}, function(err, docs){
+            return res.send(docs);
+        });
 });
 
 
 // Get a User's Favorites Endpoint
 app.post('/getFavorites', function (req, res) {
     console.log("REST::Get Favorites ");
-    console.log(req.body);
     RecipeModel.find({
         '_id': { $in: req.body }
     }, function(err, docs){
-        console.log(docs);
         return res.send(docs);
     });
 });
