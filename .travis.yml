@@ -6,3 +6,5 @@ before_script:
 script:
   - node index.js
   - npm test
+services: 
+  - mongodb
