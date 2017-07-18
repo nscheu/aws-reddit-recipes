@@ -1,3 +1,5 @@
+"use strict";
+
 // /**
 //  * Created by nic on 5/21/17.
 //  */
@@ -136,7 +138,7 @@ recipeApp.controller('NavCtrl', function ($scope, $http, $location, SecurityServ
         $http.post('/logout')
             .success(function(){
                 $scope.currentUser = null;
-                $location.url("/");
+                $location.url("/home");
             })
     }
 });

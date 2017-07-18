@@ -1,3 +1,8 @@
+"use strict";
+
+/*
+Controller for New User Registration
+ */
 recipeApp.controller('RegisterCtrl', function ($location, $scope, $http) {
     $scope.regUser = {
         username: "",

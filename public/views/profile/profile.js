@@ -1,3 +1,8 @@
+"use strict";
+
+/*
+ Controller for User Profile - Includes favoriting functions
+ */
 recipeApp.controller('ProfileCtrl', function($scope, $http, $rootScope) {
     //$scope.favoriteRecipes = $rootScope.currentUser.favorites;
     console.log("Profile Loaded");

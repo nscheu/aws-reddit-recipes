@@ -1,3 +1,5 @@
+"use strict";
+
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -9,7 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 //var async = require('async');
 //var multer = require('multer');
 
-var port = 3000;
+const PORT = 3000;
 var fs = require('fs');
 
 
@@ -53,7 +55,7 @@ fs.readFile(__dirname+'/redditDataRAW.json', 'utf8', function (err,data) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true }));
 //app.use(multer()); // for parsing multipart/form-data
-app.use(session({ secret: 'this is the secret' }));
+app.use(session({ secret: 'this is the secret', resave: true, saveUninitialized: true }));
 //app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -62,7 +64,7 @@ app.use(passport.session());
 //app.use(express.static('public'))
 app.use(express.static(__dirname + '/public'));// GET /style.css etc
 //app.listen(port, () => console.log('Server running on port 3000'))
-app.listen(port);
+app.listen(PORT);
 
 
 
@@ -209,6 +211,12 @@ app.get('/recipes', function (req, res) {
             res.send(err);
         }
         else{
+            for(var rec in recipes){
+                //console.log(recipes[rec]);
+                if(recipes[rec].thumbnail == "self"){
+                    recipes.splice(rec, 1);
+                }
+            }
             res.json(recipes);
         }
     });
@@ -285,3 +293,8 @@ exports.AddNumber = function(a,b)
 exports.helloWorld = function() {
     return 'Hello world!';
 }
+
+var testExp1 = function () {
+    return "Test Successful";
+}
+

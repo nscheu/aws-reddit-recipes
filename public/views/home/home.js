@@ -1,3 +1,7 @@
+"use strict";
+/*
+ Controller for Home View - Shows global list of recipes
+ */
 recipeApp.controller('HomeCtrl', function($scope, $http, $rootScope, SecurityService) {
     $scope.favorites = [];
     $http.get("/recipes")
