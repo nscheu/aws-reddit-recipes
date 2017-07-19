@@ -45,6 +45,7 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-requirejs": "^1.1.0",
     "karma-webpack": "^2.0.4",
+    "less": "^2.7.2",
     "mongoose": "^4.10.4",
     "node": "0.0.0",
     "passport": "^0.3.2",

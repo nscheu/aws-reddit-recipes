@@ -2,3 +2,122 @@
     height: 50px;
     width: 50px;
 }
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td {
+    background-color: #fff;
+}
+
+.table-striped > tbody > tr:nth-child(even) > td {
+    background-color: #F5F5F5;
+}
+
+/*
+Main View Components
+ */
+body {
+    background-image: url("/img/kit_bg.jpg");
+    background-size:100% auto;
+}
+
+.navbar{
+    background-image: none;
+}
+/* navbar */
+.navbar-default {
+    background-color: #302202;
+    border-color: #E7E7E7;
+}
+/* Title */
+.navbar-default .navbar-brand {
+    color: #f9f9f9;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #5E5E5E;
+}
+/* Link */
+.navbar-default .navbar-nav > li > a {
+    color: #f9f9f7;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #666;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #777;
+    background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+/* Caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #777;
+    border-bottom-color: #777;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #333;
+    border-bottom-color: #333;
+}
+.navbar-default .navbar-nav > .open > a .caret,
+.navbar-default .navbar-nav > .open > a:hover .caret,
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+/* Mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #f9f9f7;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #000000;
+    }
+}
+
+
+
+/*
+Home View
+ */
+.contentWrapperDiv{
+    margin: auto;
+    width: 70%;
+    border: 3px solid #302202;
+    padding: 10px;
+    background-color: #f9f9f9;
+    height: 50%;
+    overflow-y: auto;
+}
+.tableTitle{
+    text-align: center;
+}
+.tableWrapperDiv{
+
+}
+
+
