@@ -27,6 +27,10 @@ recipeApp.controller('HomeCtrl', function($scope, $http, $rootScope, SecuritySer
     }
 
 
-
+// For testing
+    $scope.testData = {};
+    $scope.populateTestData = function (){
+        $scope.testData = { success: true, value: 101 };
+    }
 
 });

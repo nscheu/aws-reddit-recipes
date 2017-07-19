@@ -101,11 +101,11 @@ recipeApp.controller('createUserController', function($scope) {
     };
 
     $scope.createUserSubmit = function (cu){
-        console.log("Create User Submit Called");
+        //console.log("Create User Submit Called");
         $scope.createdUser = cu;
         $scope.createdUsers.indexOf(cu) === -1 ? $scope.createdUsers.push(cu) : console.log("This item already exists")
-        console.log($scope.createdUser);
-        console.log("resetting user");
+        //console.log($scope.createdUser);
+        //console.log("resetting user");
         $scope.createdUser = {};
     }
 });
@@ -118,8 +118,11 @@ recipeApp.controller('createUserController', function($scope) {
 
 
 
+/*
+NavCtrl controller for Navigation Menu - Accesses Security Service for User Login/Out
+ */
+recipeApp.controller('NavCtrl', function ($scope, $http, $location, SecurityService, $rootScope) {
 
-recipeApp.controller('NavCtrl', function ($scope, $http, $location, SecurityService) {
     $scope.login = function (user) {
         console.log("NavCtrl");
         SecurityService.login(user, function(response){
@@ -128,7 +131,7 @@ recipeApp.controller('NavCtrl', function ($scope, $http, $location, SecurityServ
             // }
             // else{
                 console.log(response);
-                $scope.currentUser = response;
+                $rootScope.currentUser = response;
                 $location.url("/home");
             //}
     });
@@ -137,13 +140,15 @@ recipeApp.controller('NavCtrl', function ($scope, $http, $location, SecurityServ
     $scope.logout = function() {
         $http.post('/logout')
             .success(function(){
-                $scope.currentUser = null;
+                $rootScope.currentUser = null;
                 $location.url("/home");
             })
     }
 });
 
-
+/*
+Security Service for User Login/Out
+ */
 recipeApp.factory('SecurityService', function ($http, $location, $rootScope) {
 
     var login = function (user, callback) {
