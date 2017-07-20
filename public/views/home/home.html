@@ -4,24 +4,32 @@
     <h3 class="tableTitle">Welcome to the r/GifRecipes Organizer.</h3>
     <div class="tableTitle" ng-show='!currentUser'>Log in or register to save your favorite recipes!</div>
     <!--NOTES::This is where GifRecipes are displayed in Table - 10 at a time - pagination would be good-->
-    <div class="tableWrapperDiv">
-        <table class="table table-striped table-hover">
-
+    <div class="tableTitle">
+        <form name="paginationForm">
+            <label>Page #<select ng-model="selectedPage" ng-change="updatePageData()"
+                                 ng-options="n for n in pageNumbers"></select></label>
+            <button type="button" class="btn btn-danger" ng-show='!isLeftEnabled()'><</button>
+            <button type="button" class="btn btn-primary" ng-click="pageLeft()" ng-show='isLeftEnabled()'><</button>
+            <button type="button" class="btn btn-danger" ng-show='!isRightEnabled()'>></button>
+            <button type="button" class="btn btn-primary" ng-click="pageRight()" ng-show='isRightEnabled()'>></button>
+            <label>Page Size<select ng-model="pagesize" ng-change="changePageSize()"
+                                    ng-options="n for n in pageSizeRange"></select></label>
+        </form>
+    </div>
+    <table class="table table-striped table-hover">
             <thead>
             <th>Thmb</th>
             <th>Title</th>
             <th>Author</th>
             <th>Score</th>
             <th>Actions</th>
-            <!--<th>ID</th>-->
             </thead>
             <tbody>
-            <tr data-ng-repeat="rec in recipes">
+            <tr data-ng-repeat="rec in pagelist">
                 <td><img ng-src="{{ rec.thumbnail }}" id="redditThumb"></td>
                 <td>{{ rec.title }}</td>
                 <td>{{ rec.author }}</td>
                 <td>{{ rec.score }}</td>
-                <!--<td>{{ rec._id }}</td>-->
                 <td>
                     <div ng-show='currentUser'>
                         <button type="button" class="btn btn-primary" ng-click="saveFavorite(rec._id)">
@@ -32,6 +40,7 @@
             </tr>
             </tbody>
         </table>
-    </div>
+
+
 
 </div>
