@@ -38,7 +38,7 @@ module.exports = function(config) {
         'public/app.js',
         //'public/index.html',
         'public/views/home/home.js',
-        //'public/views/home/home.html',
+        //'public/views/home/packages.html',
         //'public/**/*.js',
         'spec/homeSpec.js'
     ],

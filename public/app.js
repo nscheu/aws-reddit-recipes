@@ -25,6 +25,10 @@ recipeApp.config(function($routeProvider, $httpProvider) {
             templateUrl: '/views/register/register.html',
             controller: 'RegisterCtrl'
         })
+        .when('/about', {
+            templateUrl: '/views/packages/packages.html',
+            controller: 'PackCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });

@@ -46,6 +46,41 @@ fs.readFile(__dirname+'/redditDataRAW.json', 'utf8', function (err,data) {
 
     }
 });
+
+var packageJsonFile = {};
+// Parses the text file containing data from r/GifRecipes - Async version
+fs.readFile(__dirname+'/package.json', 'utf8', function (err,data) {
+    if (err) {
+        return console.log(err);
+    }
+    else{
+        packageJsonFile = JSON.parse(data);
+        var packageObject = { name: packageJsonFile.name, packages: [] };
+
+        for(var item in packageJsonFile.dependencies){
+            packageObject.packages.push(item);
+        }
+
+        for(var item in packageJsonFile.devDependencies){
+            packageObject.packages.push(item);
+        }
+
+        PackageModel.findOne({ name: packageObject.name }, function (err, packageObj) {
+            if (!packageObj) {
+                var PackMod = new PackageModel(packageObject);
+                PackMod.save(function (err, pobj) {
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        console.log("Package Object Saved ::::")
+                    }
+                });
+            }
+        });
+    }
+});
+
 //console.log(recipeListJson);
 // Might want to do this asynchronously instead - TODO:
 //var recipeListJson = JSON.parse(fs.readFileSync(__dirname+'/public/data/redditDataRaw.json', 'utf8'));
@@ -107,12 +142,20 @@ var FavoriteSchema = new mongoose.Schema({
     recipe_id: String
 })
 
+// Schema for Package Information
+var PackageSchema = new mongoose.Schema({
+    name: String,
+    packages: [ String ]
+})
+
 // Mongoose Model for User Data
 var UserModel = mongoose.model('UserModel', UserSchema);
 // Mongoose Model for Recipe Data
 var RecipeModel = mongoose.model('RecipeModel', RecipeSchema);
 // Mongoose Model for User Favorites
 var FavoriteModel = mongoose.model('FavoriteModel', FavoriteSchema);
+// Mongoose Model for Package Information
+var PackageModel = mongoose.model('PackageModel', PackageSchema);
 
 
 
@@ -257,6 +300,21 @@ app.post('/getFavorites', function (req, res) {
     });
 });
 
+
+
+
+// Recipes Endpoint
+app.get('/packages', function (req, res) {
+    console.log("REST::Packages ");
+    PackageModel.find({},function(err, packages) {
+        if(err){
+            res.send(err);
+        }
+        else{
+            res.json(packages);
+        }
+    });
+});
 
 // Server Running Message
 console.log("REDDIT GIFRECIPES NODE APP RUNNING!!!!!!!!!!!!!!!!!");
