@@ -3,7 +3,7 @@
 /*
 Controller for New User Registration
  */
-recipeApp.controller('RegisterCtrl', function ($location, $scope, $http) {
+recipeApp.controller('RegisterCtrl', function ($location, $scope, $http, $rootScope, ngNotify) {
     $scope.regUser = {
         username: "",
         password: "",
@@ -25,6 +25,9 @@ recipeApp.controller('RegisterCtrl', function ($location, $scope, $http) {
                     //console.log(cleanUser);
                     // Redirect to profile page
                     //$location.url("/profile");
+                    ngNotify.set('Successfully Created User!', { type: 'info', duration: 750 });
+                    $rootScope.currentUser = cleanUser;
+                    $location.url("/home");
                 });
         }
         else{

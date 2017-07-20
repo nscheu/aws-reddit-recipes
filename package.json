@@ -47,6 +47,7 @@
     "karma-webpack": "^2.0.4",
     "less": "^2.7.2",
     "mongoose": "^4.10.4",
+    "ng-notify": "^0.7.1",
     "node": "0.0.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",

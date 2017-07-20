@@ -3,12 +3,11 @@
 /*
  Controller for User Profile - Includes favoriting functions
  */
-recipeApp.controller('ProfileCtrl', function($scope, $http, $rootScope) {
-    //$scope.favoriteRecipes = $rootScope.currentUser.favorites;
-    console.log("Profile Loaded");
+recipeApp.controller('ProfileCtrl', function($scope, $http, $rootScope, ngNotify) {
+    //console.log("Profile Loaded");
+    //$scope.favoriteRecipes = [];
     $http.post("/getFavorites", $rootScope.currentUser.favorites)
         .success(function (response) {
-            console.log(response);
             $scope.favoriteRecipes = response;
         })
         .error(function(err) {
@@ -25,28 +24,16 @@ recipeApp.controller('ProfileCtrl', function($scope, $http, $rootScope) {
         $http.post("/deleteFavorite", favObj)
             .success(function (response) {
                 // Updates the current users favorite list
-
-                // Map searches the favorites list to find the index of the given recipe
                 for(var i = 0; i < $scope.favoriteRecipes.length; i++){
                     if($scope.favoriteRecipes[i]._id === recipe_id){
-                        console.log("Match found")
-                        $rootScope.currentUser.favorites.splice($rootScope.currentUser.favorites.indexOf(recipe_id, 1));
                         $scope.favoriteRecipes.splice(i, 1);
                     }
                 }
-                // $scope.favoriteRecipes.forEach(function(element){
-                //     console.log(element);
-                //     if(element._id === recipe_id){
-                //         console.log("Match found")
-                //         $scope.favoriteRecipes.splice($scope.favoriteRecipes.indexOf(element), 1);
-                //     }
-                // });
-                //var favIndex = $scope.favoriteRecipes.map(function(x) {return x._id; }).indexOf(recipe_id);
-                // Removes the recipe from the favorites list
-                //$scope.favoriteRecipes.splice(favIndex, 1);
+                $rootScope.currentUser.favorites.splice($rootScope.currentUser.favorites.indexOf(recipe_id), 1);
+                ngNotify.set('Favorite Deleted!', { type: 'info', duration: 750 });
             })
             .error(function(err) {
-                console.log(err);
+                ngNotify.set('Error!', { type: 'error', duration: 750 });
             });
     }
 });

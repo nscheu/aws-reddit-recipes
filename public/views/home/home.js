@@ -2,7 +2,7 @@
 /*
  Controller for Home View - Shows global list of recipes
  */
-recipeApp.controller('HomeCtrl', function($scope, $http, $rootScope, SecurityService) {
+recipeApp.controller('HomeCtrl', function($scope, $http, $rootScope, SecurityService, ngNotify) {
     $scope.favorites = [];
     $http.get("/recipes")
          .then(function (response) {
@@ -19,10 +19,18 @@ recipeApp.controller('HomeCtrl', function($scope, $http, $rootScope, SecuritySer
         $http.post("/favorite", favObj)
             .success(function (response) {
                 //console.log(response);
-                $rootScope.currentUser.favorites.push(recipe_id);
+                if($rootScope.currentUser.favorites.indexOf(recipe_id) === -1){
+                    $rootScope.currentUser.favorites.push(recipe_id);
+                    ngNotify.set('Success!', { type: 'info', duration: 750 });
+                }
+                else{
+                    ngNotify.set('Already Favorited!', { type: 'warn', duration: 750 });
+                }
+
             })
             .error(function(err) {
-                console.log(err);
+                ngNotify.set('Error!', { type: 'error', duration: 750 });
+                //console.log(err);
             });
     }
 

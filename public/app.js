@@ -3,7 +3,7 @@
 // /**
 //  * Created by nic on 5/21/17.
 //  */
-var recipeApp = angular.module('recipeApp', ['ngRoute']);
+var recipeApp = angular.module('recipeApp', ['ngRoute', 'ngNotify']);
 
 // Configure the Routing for the app
 recipeApp.config(function($routeProvider, $httpProvider) {
@@ -124,13 +124,13 @@ NavCtrl controller for Navigation Menu - Accesses Security Service for User Logi
 recipeApp.controller('NavCtrl', function ($scope, $http, $location, SecurityService, $rootScope) {
 
     $scope.login = function (user) {
-        console.log("NavCtrl");
+        //console.log("NavCtrl");
         SecurityService.login(user, function(response){
             // if(err) {
             //     console.log(err);
             // }
             // else{
-                console.log(response);
+                //console.log(response);
                 $rootScope.currentUser = response;
                 $location.url("/home");
             //}
@@ -152,7 +152,7 @@ Security Service for User Login/Out
 recipeApp.factory('SecurityService', function ($http, $location, $rootScope) {
 
     var login = function (user, callback) {
-        console.log("Factory Login");
+        //console.log("Factory Login");
         $http.post('/login', user)
             .success(function(user){
                 $rootScope.currentUser = user;
