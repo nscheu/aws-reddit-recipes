@@ -12,20 +12,20 @@ subreddit = reddit.subreddit("GifRecipes")
 opFile = open("redditDataRAW.json", "w+")
 
 # Get the Posts from the given subreddit
-submissionObjects = subreddit.hot(limit=7);
+submissionObjects = subreddit.new(limit=1000);
 
 # Start the output string
 outputJson = '{ "submissions" : ['
 
 # For each Post in the Subreddit Checked Above: Generate a string of object attributes and properties
 for sub in submissionObjects:
-    outputJson += "{" + '"title":' + '"' + sub.title + '",'
-    outputJson += '"author":' + '"' + str(sub.author) + '",'
-    outputJson += '"thumbnail":' + '"' + sub.thumbnail + '",'
-    outputJson += '"url":' + '"' + sub.url + '",'
-    outputJson += '"score":' + '"' + str(sub.score) + '",'
+    outputJson += "{" + '"title":' + '"' + sub.title.replace('"','') + '",'
+    outputJson += '"author":' + '"' + str(sub.author).replace('"','') + '",'
+    outputJson += '"thumbnail":' + '"' + sub.thumbnail.replace('"','') + '",'
+    outputJson += '"url":' + '"' + sub.url.replace('"','') + '",'
+    outputJson += '"score":' + '"' + str(sub.score).replace('"','') + '",'
     # Time stamp perhaps to help unique ID posts
-    outputJson += '"created":' + '"' + str(sub.created) + '"' + "},"
+    outputJson += '"created":' + '"' + str(sub.created).replace('"','') + '"' + "},"
 
 # Removes the last comma to ensure valid JSON
 outputJson = outputJson[:-1]
@@ -33,7 +33,7 @@ outputJson = outputJson[:-1]
 outputJson += "] }"
 
 # Print the final String
-#print outputJson
+#print outputJson.encode('utf-8')
 
 # Write the final String to file
-opFile.write(outputJson)
+opFile.write(outputJson.encode('utf-8'))
