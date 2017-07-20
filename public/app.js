@@ -131,7 +131,7 @@ recipeApp.controller('NavCtrl', function ($scope, $http, $location, SecurityServ
             // }
             // else{
                 //console.log(response);
-                $rootScope.currentUser = response;
+                //$rootScope.currentUser = response;
                 $location.url("/home");
             //}
     });
@@ -149,7 +149,7 @@ recipeApp.controller('NavCtrl', function ($scope, $http, $location, SecurityServ
 /*
 Security Service for User Login/Out
  */
-recipeApp.factory('SecurityService', function ($http, $location, $rootScope) {
+recipeApp.factory('SecurityService', function ($http, $location, $rootScope, ngNotify) {
 
     var login = function (user, callback) {
         //console.log("Factory Login");
@@ -157,6 +157,15 @@ recipeApp.factory('SecurityService', function ($http, $location, $rootScope) {
             .success(function(user){
                 $rootScope.currentUser = user;
                 callback(user);
+            })
+            .error(function(error){
+                if(error == "Unauthorized"){
+                    ngNotify.set('User Not Found!', { type: 'error', duration: 750 });
+                }
+                else{
+                    ngNotify.set('Login Error!', { type: 'error', duration: 750 });
+                }
+                //console.log(error);
             });
     }
 
