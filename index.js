@@ -225,9 +225,14 @@ app.get('/recipes', function (req, res) {
 // Add to Favorites Endpoint
 app.post('/favorite', function (req, res) {
     console.log("REST::Favorite ");
-    UserModel.findOneAndUpdate({ _id: req.body._id }, req.body, {upsert:true}, function(err, doc){
-        if (err) return res.send(500, { error: err });
-        return res.send("succesfully saved");
+    UserModel.findOneAndUpdate({ _id: req.body._id }, req.body, { upsert:true,  new : true }, function(err, doc){
+        if (err) {
+            return res.send(500, { error: err });
+        }
+        else{
+            console.log(doc);
+            return res.send(doc);
+        }
     });
 });
 
@@ -247,6 +252,7 @@ app.post('/getFavorites', function (req, res) {
     RecipeModel.find({
         '_id': { $in: req.body }
     }, function(err, docs){
+        console.log(docs);
         return res.send(docs);
     });
 });

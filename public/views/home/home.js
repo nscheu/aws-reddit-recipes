@@ -18,7 +18,7 @@ recipeApp.controller('HomeCtrl', function($scope, $http, $rootScope, SecuritySer
         }
         $http.post("/favorite", favObj)
             .success(function (response) {
-                //console.log(response);
+                console.log(response);
                 if($rootScope.currentUser.favorites.indexOf(recipe_id) === -1){
                     $rootScope.currentUser.favorites.push(recipe_id);
                     ngNotify.set('Success!', { type: 'info', duration: 750 });
