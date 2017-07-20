@@ -6,7 +6,7 @@ module.exports = {
   deploy: {
     production: {
       user: 'ubuntu',
-      host: 'ec2-52-15-121-129.us-east-2.compute.amazonaws.com',
+      host: 'ec2-13-59-132-177.us-east-2.compute.amazonaws.com',
       key: '/Users/nic/Documents/AmazonWebServicesFiles/keyPair/amazon-instance-keypair.cer',
       ref: 'origin/master',
       repo: 'https://github.com/nscheu/aws-reddit-recipes.git',
