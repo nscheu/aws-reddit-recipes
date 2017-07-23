@@ -8,8 +8,9 @@ To Deploy after push:
 I put this into a deploy script - just use ./deploy
 
 Deployment is handled by pm2 - synced up between local and EC2
-public URL of app:
-http://ec2-52-15-121-129.us-east-2.compute.amazonaws.com/#/
+public URL of app: http://gifrecipes.nickscheuring.com/
+Subdomain forwarded to AWS ElasticIP - Old AWS public IP was changed
+
 
 To View Console Output
 pm2 logs
