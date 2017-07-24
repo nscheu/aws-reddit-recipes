@@ -1,0 +1,15 @@
+Reddit API
+
+Reddit provides an API, and unlike some websites, it’s actually quite easy to use. It’s based on REST and json, so in theory doesn’t require any fancy setup.
+
+http://www.reddit.com/dev/api
+
+The important thing is to follow the rules they set. Two of the most important ones are:
+
+     You can’t make more than 1 request every 2 seconds (or 30 a minute)
+    You must not lie about your user agent
+
+Read the rest here.
+https://github.com/reddit/reddit/wiki/API
+
+The user agent is what identifies your browser. Libraries like Python’s urllib are severely restricted by Reddit to prevent abuse. Reddit recommends you use your own special user agent, and that’s what we’ll do.

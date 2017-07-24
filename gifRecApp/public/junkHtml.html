@@ -1,0 +1,34 @@
+<img src="https://media.giphy.com/media/3o6Zt7aSSZLX6U5WtW/source.gif" height=150 width=150 >
+<a href="/login">Login</a>
+
+
+<div ng-controller="loginController">
+    <h3>Login</h3>
+    <form name="loginForm">
+        Username
+        <input type="text" name="username" ng-model="loginUser.username">
+        Password
+        <input type="password" name="password" ng-model="loginUser.password"></input>
+        <button name="submitLogin" ng-click="loginSubmit(loginUser)">Login</button>
+    </form>
+
+    <li data-ng-repeat="x in names">
+        {{ x.username}} : {{ x.password}}
+    </li>
+</div>
+
+
+<div ng-controller="createUserController">
+    <h3>Create a User</h3>
+    <form name="createUserForm">
+        Username
+        <input type="text" name="username" ng-model="createdUser.username">
+        Password
+        <input type="password" name="password" ng-model="createdUser.password"></input>
+        <button name="submitCreateUser" ng-click="createUserSubmit(createdUser)">Login</button>
+    </form>
+
+    <li data-ng-repeat="x in createdUsers">
+        {{ x.username}} : {{ x.password}}
+    </li>
+</div>

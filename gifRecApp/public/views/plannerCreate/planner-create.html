@@ -1,0 +1,141 @@
+
+
+<div name="recipesTabularView" class="contentWrapperDiv">
+    <h5 ng-show="!currentUser">  Login to view or create applications </h5>
+    <div ng-show="currentUser">
+
+        <div ng-show="planState == 'name'">
+            <div>
+                <label>Name:<input type="text" class="form-control" ng-model="tempPlan.title" /></label>
+            </div>
+            <div>
+                <label>Description:<input type="text" class="form-control" ng-model="tempPlan.description" /></label>
+            </div>
+            <button class="btn btn-primary" ng-click="savePlan()">Save</button>
+            <button class="btn btn-danger" ng-click="clearPlan()">Clear</button>
+        </div>
+        <div ng-show="planState == 'component'">
+            <div>
+                <label>Name:<input type="text" class="form-control" ng-model="tempComp.title" /></label>
+            </div>
+            <div>
+                <label>Description:<input type="text" class="form-control" ng-model="tempComp.description" /></label>
+            </div>
+            <div>
+                <label>Website:<input type="text" class="form-control" ng-model="tempComp.url" /></label>
+            </div>
+            <button class="btn btn-primary" ng-click="saveComp()">Save</button>
+            <button class="btn btn-danger" ng-click="clearComp()">Clear</button>
+        </div>
+        <div ng-show="planState == 'tutorial'">
+            add a tutorial
+            title: 'Node',
+            url: "www.nodejs.org"
+            <div>
+                <label>Name:<input type="text" class="form-control" ng-model="tempTut.title" /></label>
+            </div>
+            <div>
+                <label>Website:<input type="text" class="form-control" ng-model="tempTut.url" /></label>
+            </div>
+            <button class="btn btn-primary" ng-click="saveTut()">Save</button>
+            <button class="btn btn-danger" ng-click="clearTut()">Clear</button>
+        </div>
+        <button class="btn btn-primary" ng-click="togglePlanState('name')">Add a Title and Description</button>
+        <button class="btn btn-primary" ng-click="togglePlanState('component')">Add a Component</button>
+        <button class="btn btn-primary" ng-click="togglePlanState('tutorial')">Add a Tutorial</button>
+
+
+        <h5 ng-show="currentUser"> Username : {{ username }} {{ currentUser._id }} </h5>
+        <div class="form-group">
+            <div class="tableTitle">
+                <label>Choose an Application:</label>
+                <select ng-model="selectedPlan" ng-change="planSelected()" ng-options="plan.title for plan in data.plans"></select>
+            </div>
+            <div class="tableTitle">
+                <label>Create a New Plan:
+                    <input type="text" class="form-control" ng-model="tempPlan.title" /></label>
+                <button class="btn btn-primary" ng-click="openCreateModal()">Create a Plan</button>
+                <button class="btn btn-primary" ng-click="openCreateModal()">Add a Component Plan</button>
+            </div>
+        </div>
+    </div>
+    <h5> Application : {{ appTitle }}</h5>
+    <div ui-tree>
+        <ol ui-tree-nodes="" ng-model="currentPlan">
+            <li ng-repeat="component in currentPlan" ui-tree-node>
+                <div ui-tree-handle>
+                    <a class="btn btn-success btn-xs"
+                       ng-if="component && component.componentTutorials.length > 0"
+                       data-nodrag ng-click="toggle(this)">
+                        <span class="glyphicon"
+                              ng-class="{ 'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed }">
+                        </span>
+                    </a>
+                    {{ component.title }} :
+                    <span> {{ component.description }} : </span>{{ component.url }}
+                    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
+                            class="glyphicon glyphicon-remove"></span></a>
+                    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span
+                            class="glyphicon glyphicon-plus"></span></a>
+                    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-href="http://{{ component.url }}"><span
+                            class="glyphicon glyphicon-link"></span></a>
+                </div>
+                <ol ng-class="{ hidden: collapsed }" ui-tree-nodes="" ng-model="component.componentTutorials">
+                    <li ng-repeat="subItem in component.componentTutorials" ui-tree-node>
+                        <div ui-tree-handle>
+                            {{subItem.title}}
+                            <span><a ng-href="{{ subItem.url }}">Tutorial</a></span>
+                        </div>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+    </div>
+
+    <!-- Create/Edit Plans Modal Below-->
+    <modal-dialog show='createPlanModalShown' width='750px' height='90%'>
+        <p>Modal Content Goes here<p>
+    </modal-dialog>
+    <!--Update Modal Below-->
+    <div class="modal fade" id="createPlanModal" tabindex="-1" role="dialog" aria-labelledby="courseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Create an Application Component</h4>
+                    <h4 class="modal-title">Application : {{ tempPlan.title }}</h4>
+                </div>
+                <div class="modal-body">
+                    <form novalidate class="simple-form">
+                        <div>
+                            <label>Title: <input type="text" class="form-control" ng-model="tempComp.title" /></label>
+                        </div>
+                        <div>
+                            <label>Description: <input type="text" class="form-control" ng-model="tempComp.description" /></label>
+                        </div>
+                        <div>
+                            <label>Website: <input type="text" class="form-control" ng-model="tempComp.url" /></label>
+                        </div>
+
+
+
+                        title: 'Node',
+                        description: 'NodeJS for Server Tech',
+                        url: "www.nodejs.org",
+                        componentTutorials: [
+                        <input class="btn btn-primary" type="button" ng-click="addComponent()" value="Add Component" />
+                        <input class="btn btn-primary" type="button" ng-click="reset()" value="Reset" />
+                        <input class="btn btn-primary" type="submit" ng-click="savePlan()" value="Save" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="updateUserInDb(updateUser)" type="button" class="btn btn-primary">Ok</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
