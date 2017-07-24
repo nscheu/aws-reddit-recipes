@@ -4,8 +4,8 @@
   "description": "Repo for Reddit Scrape Python Bot -> AWS MEAN and ReactNative Apps",
   "main": "gifRecApp/index.js",
   "scripts": {
-    "restart": "pm2 startOrRestart gifRecApp/ecosystem.config.js",
-    "deploy": "pm2 deploy gifRecApp/ecosystem.config.js production",
+    "restart": "pm2 startOrRestart ecosystem.config.js",
+    "deploy": "pm2 deploy ecosystem.config.js production",
     "test": "jasmine"
   },
   "repository": {
