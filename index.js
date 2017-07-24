@@ -148,6 +148,32 @@ var PackageSchema = new mongoose.Schema({
     packages: [ String ]
 })
 
+// Schema for Application Planner
+var PlannerSchema = new mongoose.Schema({
+    user_id: String,
+    username: String,
+    plans: [
+        {   title: String,
+            components: [
+                {
+                    title: String,
+                    description: String,
+                    url: String,
+                    componentTutorials: [
+                        {
+                            title: String,
+                            url: String
+                        } ]
+                } ]
+        } ]
+});
+
+
+
+
+
+
+
 // Mongoose Model for User Data
 var UserModel = mongoose.model('UserModel', UserSchema);
 // Mongoose Model for Recipe Data
@@ -156,6 +182,8 @@ var RecipeModel = mongoose.model('RecipeModel', RecipeSchema);
 var FavoriteModel = mongoose.model('FavoriteModel', FavoriteSchema);
 // Mongoose Model for Package Information
 var PackageModel = mongoose.model('PackageModel', PackageSchema);
+// Mongoose Model for Application Planning
+var PlannerModel = mongoose.model('PlannerModel', PlannerSchema);
 
 
 
@@ -315,6 +343,38 @@ app.get('/packages', function (req, res) {
         }
     });
 });
+
+
+
+// Add to Favorites Endpoint
+app.post('/savePlans', function (req, res) {
+    console.log("REST::Save Plans ");
+    PlannerModel.findOneAndUpdate({ user_id: req.body.user_id }, req.body, { upsert:true,  new : true }, function(err, doc){
+        if (err) {
+            return res.send(500, { error: err });
+        }
+        else{
+            console.log(doc);
+            return res.send(doc);
+        }
+    });
+});
+
+app.post('/getPlans', function (req, res) {
+    console.log("REST : Get Plans");
+    //console.log(req.body.id);
+    PlannerModel.findOne({ user_id: req.body.id }, function (err, plan) {
+        if (plan) {
+            //console.log(plan);
+            res.send(plan);
+        }
+        else {
+            //console.log(err);
+            res.send(err);
+        }
+    });
+});
+
 
 // Server Running Message
 console.log("REDDIT GIFRECIPES NODE APP RUNNING!!!!!!!!!!!!!!!!!");

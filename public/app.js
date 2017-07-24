@@ -3,7 +3,7 @@
 // /**
 //  * Created by nic on 5/21/17.
 //  */
-var recipeApp = angular.module('recipeApp', ['ngRoute', 'ngNotify']);
+var recipeApp = angular.module('recipeApp', ['ngRoute', 'ngNotify', 'ui.tree']);
 
 // Configure the Routing for the app
 recipeApp.config(function($routeProvider, $httpProvider) {
@@ -28,6 +28,14 @@ recipeApp.config(function($routeProvider, $httpProvider) {
         .when('/about', {
             templateUrl: '/views/packages/packages.html',
             controller: 'PackCtrl'
+        })
+        .when('/planner', {
+            templateUrl: '/views/planner/planner.html',
+            controller: 'PlannerCtrl'
+        })
+        .when('/plannerCreate', {
+            templateUrl: '/views/plannerCreate/planner-create.html',
+            controller: 'PlannerCreateCtrl'
         })
         .otherwise({
             redirectTo: '/'
