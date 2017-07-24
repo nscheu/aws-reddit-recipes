@@ -10,7 +10,7 @@ module.exports = {
       key: '/Users/nic/Documents/AmazonWebServicesFiles/keyPair/amazon-instance-keypair.cer',
       ref: 'origin/master',
       repo: 'https://github.com/nscheu/aws-reddit-recipes.git',
-      path: '/home/ubuntu/node-server',
+      path: '/home/ubuntu/node-server/gifRecApp/',
       "post-setup": "ls -la",
       // Commands to execute locally (on the same machine you deploy things)
       // Can be multiple commands separated by the character ";"
