@@ -1,8 +1,13 @@
 module.exports = {
-  apps: [{
-    name: 'gifServer',
-    script: './gifRecApp/index.js'
-  }],
+  apps: [
+      {
+          name: 'gifServer',
+          script: './gifRecApp/index.js'
+      },
+      {
+          name: 'planApp',
+          script: './appPlannerApp/server.js'
+      }],
   deploy: {
     production: {
       user: 'ubuntu',
