@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: 'aws-recipe-scraper',
+    name: 'gifServer',
     script: './gifRecApp/index.js'
   }],
   deploy: {
