@@ -4,6 +4,7 @@
 //  * Created by nic on 5/21/17.
 //  */
 var recipeApp = angular.module('recipeApp', ['ngRoute', 'ngNotify', 'ui.tree']);
+var recipeApp = angular.module('recipeApp', ['ngRoute', 'ngNotify', 'ui.tree']);
 
 // Configure the Routing for the app
 recipeApp.config(function($routeProvider, $httpProvider) {

@@ -196,3 +196,12 @@ tr.angular-ui-tree-empty {
     display: none!important;
     visibility: collapse!important;
 }
+
+.subHeading {
+    margin-bottom: 10px;
+}
+
+.pageButtons {
+    margin-left: 20px;
+    margin-right: 10px;
+}

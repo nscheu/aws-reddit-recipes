@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/nscheu/aws-reddit-recipes#readme",
   "dependencies": {
+    "angular-sanitize": "^1.3.14",
     "express": "^4.15.3",
     "jasmine": "^2.6.0",
     "request": "^2.81.0"
