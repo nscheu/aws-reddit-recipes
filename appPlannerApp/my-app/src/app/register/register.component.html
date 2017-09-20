@@ -1,0 +1,56 @@
+<div class="container">
+
+
+  <form ng-form="register_form" ng-bind="registerUser" (ngSubmit)="doRegister($event)">
+    <h3>Register</h3>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" placeholder="Username"
+             required [(ngModel)]="registerusermodel.username" name="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password"
+              required [(ngModel)]="registerusermodel.password" name="password">
+    </div>
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="firstname" class="form-control" id="firstname" placeholder="First Name"
+             required [(ngModel)]="registerusermodel.firstname" name="firstname">
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input type="lastname" class="form-control" id="lastname" placeholder="Last Name"
+             required [(ngModel)]="registerusermodel.lastname" name="lastname">
+    </div>
+    <div class="form-group">
+      <label for="street">Street Address</label>
+      <input type="street" class="form-control" id="street" placeholder="Street Address"
+             required [(ngModel)]="addressmodel.street" name="street">
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="city" class="form-control" id="city" placeholder="City"
+             required [(ngModel)]="addressmodel.city" name="city">
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="state" class="form-control" id="state" placeholder="State"
+             required [(ngModel)]="addressmodel.state" name="state">
+    </div>
+    <div class="form-group">
+      <label for="zip">ZIP</label>
+      <input type="zip" class="form-control" id="zip" placeholder="ZIP"
+             required [(ngModel)]="addressmodel.zip" name="zip">
+    </div>
+    <div>
+      <button class="btn btn-primary" >Register</button>
+    </div>
+  </form>
+</div>
+
+<div>
+  <h5>Register & Address Models</h5>
+  {{ currentUser }}
+  {{ addressmodel }}
+</div>
